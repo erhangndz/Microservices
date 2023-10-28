@@ -8,7 +8,7 @@ using MongoDB.Driver;
 
 namespace FreeCourse.Services.Catalog.Services.Concrete
 {
-    internal class CategoryService : ICategoryService
+    public class CategoryService : ICategoryService
     {
         private readonly IMongoCollection<Category> _categoryCollection;
 
@@ -34,9 +34,10 @@ namespace FreeCourse.Services.Catalog.Services.Concrete
             return Response<List<CategoryDto>>.Success(_mapper.Map<List<CategoryDto>>(categories), 200);
         }
 
-        public async Task<Response<CategoryDto>> CreateAsync(CreateCategoryDto category)
+        public async Task<Response<CategoryDto>> CreateAsync(CreateCategoryDto categoryDto)
         {
-            await _categoryCollection.InsertOneAsync(_mapper.Map<Category>(category));
+           var category= _mapper.Map<Category>(categoryDto);
+            await _categoryCollection.InsertOneAsync(category);
 
             return Response<CategoryDto>.Success(_mapper.Map<CategoryDto>(category), 200);
         }

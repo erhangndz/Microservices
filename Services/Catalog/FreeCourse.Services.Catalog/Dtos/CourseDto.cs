@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace FreeCourse.Services.Catalog.Dtos
 {
-    internal class CourseDto
+    public class CourseDto
     {
         
         public string CourseId { get; set; }

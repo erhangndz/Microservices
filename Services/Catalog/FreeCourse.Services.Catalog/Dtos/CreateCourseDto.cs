@@ -1,6 +1,6 @@
 ﻿namespace FreeCourse.Services.Catalog.Dtos
 {
-    internal class CreateCourseDto
+    public class CreateCourseDto
     {
         public string Name { get; set; }
 
