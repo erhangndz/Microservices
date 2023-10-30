@@ -1,16 +1,27 @@
 using FreeCourse.Services.Catalog.Services.Concrete;
 using FreeCourse.Services.Catalog.Services.Interfaces;
 using FreeCourse.Services.Catalog.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerURL"];
+    opt.Audience = "resource_catalog";
+    opt.RequireHttpsMetadata = false;
+});
 
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<ICourseService,CourseService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter());
+});
 
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
@@ -25,6 +36,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -35,7 +50,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
