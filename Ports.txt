@@ -1,4 +1,5 @@
 Services
 -CatalogAPI=>    https:5011   http:5010
--PhotoStockAPI=> https:5013   http:5012  
+-PhotoStockAPI=> https:5009   http:5012  
+-BasketAPI=>	 https:5008   http:5013
 IdentityServer =>			  http:5001
