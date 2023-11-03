@@ -1,2 +1,4 @@
 Services
--CatalogAPI=> https: 5011 http:5010
+-CatalogAPI=>    https:5011   http:5010
+-PhotoStockAPI=> https:5013   http:5012  
+IdentityServer =>			  http:5001
