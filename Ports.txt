@@ -3,4 +3,5 @@ Services
 -PhotoStockAPI=> https:5009   http:5012  
 -BasketAPI=>	 https:5008   http:5013
 -DiscountAPI=>   https:7248   http:5014
+-OrderAPI =>     https:7231   http:5015
 IdentityServer =>			  http:5001
