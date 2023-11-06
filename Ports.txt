@@ -6,3 +6,4 @@ Services
 -OrderAPI =>      https:7231   http:5015
 -FakePaymentAPI=> https:7299   http:5016
 IdentityServer =>			   http:5001
+Gateway =>		  https:7019   http:5000
