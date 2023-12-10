@@ -7,3 +7,4 @@ Services
 -FakePaymentAPI=> https:7299   http:5016
 IdentityServer =>			   http:5001
 Gateway =>		  https:7019   http:5000
+Web MVC =>		  https:7158   http:5009
