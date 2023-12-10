@@ -1,0 +1,39 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center" >Kullanıcı Bilgileri</h5>
+
+                <table class="table table-striped">
+
+                    <tr>
+                       
+                        <th>Kullanıcı Adı</th>
+                        <td>@Model.UserName</td>
+                     
+                  
+                    </tr>
+
+                    <tr>
+                        <th>Email</th>
+                        <td>@Model.Email</td>
+                       
+                    </tr>
+                    <tr>
+                        <th>Şehir</th>
+                        <td>@Model.City</td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
