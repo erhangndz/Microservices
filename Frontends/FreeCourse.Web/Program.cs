@@ -1,3 +1,5 @@
+using FreeCourse.Shared.Services.Abstract;
+using FreeCourse.Shared.Services.Concrete;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services.Concrete;
@@ -9,12 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 
 var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
 
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(opt =>
+{
+    opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddHttpClient<IUserService, UserService>(opt =>
 {
