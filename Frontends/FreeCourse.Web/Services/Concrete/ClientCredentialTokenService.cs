@@ -24,7 +24,7 @@ namespace FreeCourse.Web.Services.Concrete
 
         public async Task<string> GetToken()
         {
-            var currentToken = await _clientAccessTokenCache.GetAsync("WebClientToken",default);
+            var currentToken = await _clientAccessTokenCache.GetAsync("WebClientToken",default,default);
             if (currentToken != null)
             {
                 return currentToken.AccessToken;
@@ -63,7 +63,7 @@ namespace FreeCourse.Web.Services.Concrete
             return newToken.AccessToken;
 
 
-            throw new NotImplementedException();
+            
         }
     }
 }

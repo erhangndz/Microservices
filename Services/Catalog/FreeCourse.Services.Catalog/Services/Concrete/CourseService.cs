@@ -82,7 +82,7 @@ namespace FreeCourse.Services.Catalog.Services.Concrete
 
         public async Task<Response<List<CourseDto>>> GetAllByUserIdAsync(string userId)
         {
-            var courses = await _courseCollection.Find<Course>(x => x.UserId == userId).ToListAsync();
+            var courses = await _courseCollection.Find(x => x.UserId == userId).ToListAsync();
 
             if (courses.Any())
             {

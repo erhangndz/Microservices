@@ -1,0 +1,51 @@
+﻿@model CreateCourseInput
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kurs Ekleme</h5>
+
+                <form asp-controller="Courses" asp-action="Create" method="post" enctype="multipart/form-data">
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Kategori</label>
+                       @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.categoryList,"Kategoriyi Seçin",new{@class="form-control"}) 
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" id="exampleInput">Kurs Adı</label>
+                        <input class="form-control" asp-for="Name" id="exampleInput"  required />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" id="exampleInput">Fiyat</label>
+                        <input class="form-control" asp-for="Price" id="exampleInput" required />
+                        <span class="text-danger" asp-validation-for="Price"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" id="exampleInput">Açıklama</label>
+                        <textarea class="form-control" asp-for="Description" id="exampleInput" rows="3" required ></textarea>
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" id="exampleInput">Kurs Süresi</label>
+                        <input class="form-control" asp-for="Feature.Duration" id="exampleInput" required />
+                        <span class="text-danger" asp-validation-for="Feature.Duration"></span>
+                    </div>
+
+                    @*Resim input gelecek*@
+
+                    <button class="btn btn-primary">Kaydet</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

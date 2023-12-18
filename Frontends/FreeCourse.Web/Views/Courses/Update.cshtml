@@ -1,0 +1,57 @@
+﻿@model UpdateCourseInput
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kurs Güncelleme</h5>
+
+                <form asp-controller="Courses" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="CourseId" />
+                    <input type="hidden" asp-for="UserId" />
+                    <input type="hidden" asp-for="Picture" />
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Kategori</label>
+                        <select type="text" asp-for="CategoryId" class="form-control"  asp-items="@ViewBag.categoryList" required>
+                          
+                        </select>
+                        <span class="text-danger" asp-validation-for="CategoryId"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" >Kurs Adı</label>
+                        <input class="form-control" asp-for="Name"  required />
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" >Fiyat</label>
+                        <input class="form-control" asp-for="Price"  required />
+                        <span class="text-danger" asp-validation-for="Price"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" >Açıklama</label>
+                        <textarea class="form-control" asp-for="Description"  rows="3" required></textarea>
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" >Kurs Süresi</label>
+                        <input class="form-control" asp-for="Feature.Duration"  required />
+                        <span class="text-danger" asp-validation-for="Feature.Duration"></span>
+                    </div>
+
+                    @*Resim input gelecek*@
+
+                    <button class="btn btn-primary" type="submit">Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

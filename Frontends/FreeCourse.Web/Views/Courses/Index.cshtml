@@ -10,16 +10,20 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Kurslar</h5>
+                <a asp-controller="Courses" asp-action="Create" class="btn btn-primary mb-3">Kurs Oluştur</a>
                 @if (Model.Any())
                 {
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th>Resim</th>
                                 <th>Kurs</th>
                                 <th>Fiyat</th>
                                 <th>Süre</th>
+                                <th>Kategori</th>
+                                <th></th>
                             </tr>
+                        </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
@@ -28,10 +32,16 @@
                                         <td>@item.Name</td>
                                         <td>@item.Price ₺</td>
                                         <td>@item.Feature.Duration</td>
+                                        <td>@item.Category.Name</td>
+                                        <td>
+                                            <a asp-controller="Courses" asp-action="Update" asp-route-id="@item.CourseId" class="btn btn-outline-success">Güncelle</a>
+
+                                        <a asp-controller="Courses" asp-action="Delete" asp-route-id="@item.CourseId" class="btn btn-outline-danger">Sil</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
-                        </thead>
+                      
                     </table>
 
                 }
@@ -39,6 +49,7 @@
                 {
                     <div class="alert alert-info">Kayıtlı kurs bulunamadı</div>
                 }
+
             </div>
         </div>
     </div>
