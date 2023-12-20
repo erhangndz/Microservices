@@ -19,5 +19,7 @@
 
 
         public string CategoryId { get; set; }
+
+        public IFormFile PhotoFormFile { get; set; }
     }
 }
