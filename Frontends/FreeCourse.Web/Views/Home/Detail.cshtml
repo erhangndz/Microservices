@@ -1,0 +1,31 @@
+﻿@model CourseViewModel
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="row">
+<div class="col-md-9">
+    <div class="card">
+        <img src="@Model.StockPictureUrl" class="card-img-top" style="height:350px" />
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+            <p class="card-text">
+                @Model.Description
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Fiyat: @Model.Price ₺</h5>
+
+            <a href="#" class="btn btn-primary form-control">Sepete Ekle</a>
+
+
+
+        </div>
+    </div>
+</div>
+</div>

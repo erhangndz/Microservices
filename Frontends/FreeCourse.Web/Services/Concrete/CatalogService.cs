@@ -68,7 +68,7 @@ namespace FreeCourse.Web.Services.Concrete
 
             response.Data.ForEach(x =>
             {
-                x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
+                x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
             });
 
 			return response.Data;
@@ -85,7 +85,7 @@ namespace FreeCourse.Web.Services.Concrete
 
             responseSuccess.Data.ForEach(x =>
             {
-                x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
+                x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
             });
 
             return responseSuccess.Data;
@@ -100,11 +100,11 @@ namespace FreeCourse.Web.Services.Concrete
 			}
 			var responseSuccess = await response.Content.ReadFromJsonAsync<Response<CourseViewModel>>();
 
+            responseSuccess.Data.StockPictureUrl = _photoHelper.GetPhotoStockUrl(responseSuccess.Data.Picture);
 
 
 
-
-			return responseSuccess.Data;
+            return responseSuccess.Data;
 		}
 
         public async Task<bool> UpdateCourseAsync(UpdateCourseInput updateCourseInput)

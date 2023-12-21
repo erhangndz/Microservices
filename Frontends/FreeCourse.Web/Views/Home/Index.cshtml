@@ -18,12 +18,12 @@
         }
         <div class="col">
             <div class="card" style="width: 18rem;">
-                <img src="@item.Picture" class="card-img-top" alt="..." style="height:200px;width:285px">
+                <img src="@item.StockPictureUrl" class="card-img-top" alt="..." style="width:72">
                 <div class="card-body">
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text">@item.ShortDescription</p>
                     <h4 class="text-primary">@item.Price ₺</h4>
-                    <a href="#" class="btn btn-primary">Detay</a>
+                    <a asp-route-id="@item.CourseId" asp-action="Detail" asp-controller="Home" class="btn btn-primary">Detay</a>
                 </div>
             </div>
         </div>
