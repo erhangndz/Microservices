@@ -8,11 +8,11 @@ namespace FreeCourse.Web.Exceptions
         {
         }
 
-        public UnAuthorizeException(string? message) : base(message)
+        public UnAuthorizeException(string message) : base(message)
         {
         }
 
-        public UnAuthorizeException(string? message, Exception? innerException) : base(message, innerException)
+        public UnAuthorizeException(string message, Exception innerException) : base(message, innerException)
         {
         }
 

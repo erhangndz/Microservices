@@ -26,7 +26,7 @@ namespace FreeCourse.Web.Services.Concrete
             }
             else
             {
-                basket = new BasketViewModel();
+               
                 basket.BasketItems.Add(basketItemViewModel);
             }
 
@@ -51,13 +51,14 @@ namespace FreeCourse.Web.Services.Concrete
 
         public async Task<BasketViewModel> Get()
         {
-            var response = await _httpClient.GetFromJsonAsync<Response<BasketViewModel>>("baskets");
-            if(!response.IsSuccessful)
+            var response = await _httpClient.GetAsync("baskets");
+            if(!response.IsSuccessStatusCode)
             {
                 return null;
             }
 
-            return response.Data;
+            var result = await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
+            return result.Data;
         }
 
         public async Task<bool> RemoveBasketItem(string courseId)

@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using FreeCourse.Shared.Services.Abstract;
 using FreeCourse.Shared.Services.Concrete;
 using FreeCourse.Web.Extensions;
@@ -6,6 +7,7 @@ using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services.Concrete;
 using FreeCourse.Web.Services.Interfaces;
+using FreeCourse.Web.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Runtime.ConstrainedExecution;
 
@@ -33,7 +35,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.Cookie.Name = "webcookie";
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(x=> x.RegisterValidatorsFromAssemblyContaining<CreateCourseInputValidator>());
+
 
 var app = builder.Build();
 

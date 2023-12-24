@@ -9,9 +9,11 @@
         <img src="@Model.StockPictureUrl" class="card-img-top" style="height:350px" />
         <div class="card-body">
             <h5 class="card-title">@Model.Name</h5>
+                <div class="badge bg-primary">Kategori: @Model.Category.Name</div>
             <p class="card-text">
                 @Model.Description
             </p>
+          
         </div>
     </div>
 </div>
@@ -21,7 +23,7 @@
         <div class="card-body">
             <h5 class="card-title">Fiyat: @Model.Price ₺</h5>
 
-            <a href="#" class="btn btn-primary form-control">Sepete Ekle</a>
+            <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-courseId="@Model.CourseId" class="btn btn-primary form-control">Sepete Ekle</a>
 
 
 
