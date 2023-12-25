@@ -16,27 +16,28 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Kategori</label>
                        @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.categoryList,"Kategoriyi Seçin",new{@class="form-control"}) 
+                           <span class="text-danger" asp-validation-for="CategoryId"></span>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" id="exampleInput">Kurs Adı</label>
-                        <input class="form-control" asp-for="Name" id="exampleInput"  />
+                        <input class="form-control" asp-for="Name"  />
                         <span class="text-danger" asp-validation-for="Name"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" id="exampleInput">Fiyat</label>
-                        <input class="form-control" asp-for="Price" id="exampleInput"  />
+                        <input class="form-control" asp-for="Price"   />
                         <span class="text-danger" asp-validation-for="Price"></span>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label" id="exampleInput">Açıklama</label>
-                        <textarea class="form-control" asp-for="Description" id="exampleInput" rows="3"  ></textarea>
+                        <textarea class="form-control" asp-for="Description"  rows="3"  ></textarea>
                         <span class="text-danger" asp-validation-for="Description"></span>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" id="exampleInput">Kurs Süresi</label>
-                        <input class="form-control" asp-for="Feature.Duration" id="exampleInput" />
+                        <input class="form-control" asp-for="Feature.Duration"  />
                         <span class="text-danger" asp-validation-for="Feature.Duration"></span>
                     </div>
 

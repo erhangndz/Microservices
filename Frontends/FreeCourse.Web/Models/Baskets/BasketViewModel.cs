@@ -2,6 +2,11 @@
 {
     public class BasketViewModel
     {
+        public BasketViewModel()
+        {
+            _basketItems = new List<BasketItemViewModel>();
+        }
+
         public string UserId { get; set; }
         public string DiscountCode { get; set; }
 
@@ -12,7 +17,7 @@
         {
             get
             {
-                if (HasDiscount==true)
+                if (HasDiscount)
                 {
                     _basketItems.ForEach(x =>
                     {
@@ -24,18 +29,47 @@
             }
             set
             {
-                _basketItems= value;
+                _basketItems = value;
             }
 
 
         }
 
-        public decimal TotalPrice { get => _basketItems.Sum(x => x.GetCurrentPrice * x.Quantity); }
+        public decimal TotalPrice
+        {
+            get
+            {
+                if(HasDiscount)
+                {
+                   return _basketItems.Sum(x => x.GetCurrentPrice);
+                }
+               return _basketItems.Sum(x => x.Price);
+            }
+
+            set
+            {
+                TotalPrice = value; 
+            }
+        }
 
 
         public bool HasDiscount
         {
-            get => !string.IsNullOrEmpty(DiscountCode);
+            get => !string.IsNullOrEmpty(DiscountCode) && !DiscountRate.Equals(null);
         }
+
+        public void CancelDiscount()
+        {
+            DiscountCode = null;
+            DiscountRate = Convert.ToInt32(null);
+        }
+
+        public void ApplyDiscount(string code, int rate)
+        {
+            DiscountCode = code;
+            DiscountRate = rate;
+        }
+
+  
     }
 }

@@ -1,5 +1,7 @@
 ﻿using FreeCourse.Web.Models.Baskets;
+using FreeCourse.Web.Models.Discounts;
 using FreeCourse.Web.Services.Interfaces;
+using FreeCourse.Web.Validators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,6 +40,33 @@ namespace FreeCourse.Web.Controllers
         public async Task<IActionResult> RemoveBasketItem(string courseId)
         {
             await _basketService.RemoveBasketItem(courseId);
+            return RedirectToAction("Index");
+        }
+
+
+        public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
+        {
+            var discountValidator = new DiscountApplyInputValidator();
+            var result =  discountValidator.Validate(discountApplyInput);
+
+            if(!result.IsValid)
+            {
+                result.Errors.ForEach(x =>
+                {
+                    ModelState.AddModelError(x.PropertyName, x.ErrorMessage);
+                });
+                return RedirectToAction("Index");
+            }
+
+            var discountStatus = await _basketService.ApplyDiscount(discountApplyInput.Code);
+
+            TempData["discountStatus"] = discountStatus;
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> CancelAppliedDiscount()
+        {
+            await _basketService.CancelAppliedDiscount();
             return RedirectToAction("Index");
         }
     }

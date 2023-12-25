@@ -1,6 +1,7 @@
 ﻿using FreeCourse.Shared.Services.Abstract;
 using FreeCourse.Web.Models.Catalogs;
 using FreeCourse.Web.Services.Interfaces;
+using FreeCourse.Web.Validators;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -46,13 +47,27 @@ namespace FreeCourse.Web.Controllers
 		{
             var categories = await _catalogService.GetAllCategoriesAsync();
 
-            ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+            ViewBag.categoryList = new List<SelectListItem>(from x in categories
+                                                            select new SelectListItem
+                                                            {
+                                                                Text = x.Name,
+                                                                Value = x.CategoryId
+                                                            }).ToList();
+           
 
             createCourseInput.UserId = _identityService.GetUserId;
 
-			await _catalogService.CreateCourseAsync(createCourseInput);
+			var courseValidator = new CreateCourseInputValidator();
+			var result = courseValidator.Validate(createCourseInput);
+			if (result.IsValid)
+			{
+				await _catalogService.CreateCourseAsync(createCourseInput);
+                return RedirectToAction("Index");
+            }
+			result.Errors.ForEach(x =>
+			ModelState.AddModelError(x.PropertyName, x.ErrorMessage));
 
-			return RedirectToAction("Index");
+			return View();
 		}
 
 		public async Task<IActionResult> Update(string id)

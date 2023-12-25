@@ -24,13 +24,13 @@
                         {
                             <tr>
                                 <td>@item.CourseName</td>
-                                <td>@item.GetCurrentPrice ₺</td>
+                                <td>@(Model.HasDiscount ? @item.GetCurrentPrice : item.Price) ₺</td>
                                 <td>
                                     <a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-courseId="@item.CourseId" class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         }
-
+                      
                         @if (Model.HasDiscount)
                         {
                             <tr>
@@ -43,15 +43,40 @@
                             <td>@(Model.HasDiscount ? "İndirimli Fiyat" : "Toplam Fiyat")</td>
                             <th colspan="2">@Model.TotalPrice ₺</th>
                         </tr>
-
+                      
 
 
                     </table>
 
 
+                    <form asp-controller="Basket" asp-action="ApplyDiscount">
+                        @if (Model.HasDiscount)
+                        {
+                            <div class="alert alert-success"> "@Model.DiscountCode" İndirim Kodu Uygulandı.  <a asp-controller="Basket" asp-action="CancelAppliedDiscount" class="badge bg-danger-subtle">İptal Et</a> </div>
+                           
+                        }
+                        @if (TempData["discountStatus"] == null)
+                        {
+                            <div></div>
+                        }
+                        else if ((bool)TempData["discountStatus"] == false)
+                        {
+                            <div class="text-danger">İndirim Kodu Geçersiz! </div>
+                        }
+                        
+
+                        <div class="input-group mb-3">
+                            <input type="text" name="Code" class="form-control" />
+                          
+                            <button class="btn btn-outline-secondary" type="submit">Uygula</button>
+                            <div class="text-danger" asp-validation-for="Code"></div>
+
+                        </div>
+                    </form>
 
 
 
+                            
                 }
 
                 else

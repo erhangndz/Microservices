@@ -11,7 +11,7 @@ namespace FreeCourse.Web.Models.Baskets
 
         private decimal DiscountAppliedPrice { get; set; }
 
-        public decimal GetCurrentPrice => DiscountAppliedPrice.Equals(null) ? DiscountAppliedPrice : Price  ;
+        public decimal GetCurrentPrice {  get=> !DiscountAppliedPrice.Equals(null) ? DiscountAppliedPrice : Price  ;}
 
         public void AppliedDiscount(decimal discountPrice)
         {
