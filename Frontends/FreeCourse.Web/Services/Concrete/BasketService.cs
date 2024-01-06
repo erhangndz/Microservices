@@ -28,7 +28,8 @@ namespace FreeCourse.Web.Services.Concrete
             }
             else
             {
-
+                basket = new BasketViewModel();
+                
                 basket.BasketItems.Add(basketItemViewModel);
             }
 

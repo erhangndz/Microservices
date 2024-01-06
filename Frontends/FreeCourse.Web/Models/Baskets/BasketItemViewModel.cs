@@ -9,9 +9,9 @@ namespace FreeCourse.Web.Models.Baskets
         public string CourseName { get; set; }
         public decimal Price { get; set; }
 
-        private decimal DiscountAppliedPrice { get; set; }
+        private decimal? DiscountAppliedPrice;
 
-        public decimal GetCurrentPrice {  get=> !DiscountAppliedPrice.Equals(null) ? DiscountAppliedPrice : Price  ;}
+        public decimal GetCurrentPrice {  get=> !DiscountAppliedPrice.Equals(null) ? DiscountAppliedPrice.Value : Price  ;}
 
         public void AppliedDiscount(decimal discountPrice)
         {

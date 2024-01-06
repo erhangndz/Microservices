@@ -1,0 +1,52 @@
+[
+  {
+    "Name": "Yeni Profil",
+    "Projects": [
+      {
+        "Name": "Services\\Catalog\\FreeCourse.Services.Catalog\\FreeCourse.Services.Catalog.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "IdentityServer\\FreeCourse.IdentityServer\\FreeCourse.IdentityServer.csproj",
+        "Action": "Start",
+        "DebugTarget": "SelfHost"
+      },
+      {
+        "Name": "Services\\PhotoStock\\FreeCourse.Services.PhotoStock\\FreeCourse.Services.PhotoStock.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Services\\Basket\\FreeCourse.Services.Basket\\FreeCourse.Services.Basket.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Services\\Discount\\FreeCourse.Services.Discount\\FreeCourse.Services.Discount.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Gateways\\FreeCourse.Gateway\\FreeCourse.Gateway.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Frontends\\FreeCourse.Web\\FreeCourse.Web.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Services\\Order\\FreeCourse.Services.Order.API\\FreeCourse.Services.Order.API.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "Services\\FakePayment\\FreeCourse.Services.FakePayment\\FreeCourse.Services.FakePayment.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      }
+    ]
+  }
+]
