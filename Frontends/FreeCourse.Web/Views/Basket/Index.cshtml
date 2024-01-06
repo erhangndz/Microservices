@@ -24,7 +24,7 @@
                         {
                             <tr>
                                 <td>@item.CourseName</td>
-                                <td>@(Model.HasDiscount ? @item.GetCurrentPrice : item.Price) ₺</td>
+                                <td>@(Model.HasDiscount ? @item.GetCurrentPrice + " ₺" + "  " + $"%{Model.DiscountRate} İndirim uygulandı" : item.Price) ₺</td>
                                 <td>
                                     <a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-courseId="@item.CourseId" class="btn btn-danger">Sil</a>
                                 </td>
@@ -66,7 +66,7 @@
                         
 
                         <div class="input-group mb-3">
-                            <input type="text" name="Code" class="form-control" />
+                            <input type="text" name="Code"  />
                           
                             <button class="btn btn-outline-secondary" type="submit">Uygula</button>
                             <div class="text-danger" asp-validation-for="Code"></div>
