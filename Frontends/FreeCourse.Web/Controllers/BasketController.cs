@@ -29,8 +29,10 @@ namespace FreeCourse.Web.Controllers
        
         public async Task<IActionResult> AddBasketItem(string courseId)
         {
+
+
             var course = await _catalogService.GetByCourseIdAsync(courseId);
-            var basketItem = new BasketItemViewModel { CourseId = course.CourseId, CourseName=course.Name, Price= course.Price };
+            var basketItem = new BasketItemViewModel { CourseId = course.CourseId, CourseName = course.Name, Price = course.Price };
 
             await _basketService.AddBasketItem(basketItem);
 

@@ -20,6 +20,6 @@ namespace FreeCourse.Services.Basket.Services.Concrete
 
         public void Connect() => _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
 
-        public IDatabase GetDb(int db = 1) => _connectionMultiplexer.GetDatabase(db);
+        public IDatabase GetDb(int db = 2) => _connectionMultiplexer.GetDatabase(db);
     }
 }

@@ -16,6 +16,21 @@ namespace FreeCourse.Web.Services.Concrete
             _discountService = discountService;
         }
 
+
+
+        public async Task<BasketViewModel> Get()
+        {
+            //var response = await _httpClient.GetAsync("baskets");
+            //if (!response.IsSuccessStatusCode)
+            //{
+            //    return new BasketViewModel();
+            //}
+
+            //var result = await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
+
+            var result = await _httpClient.GetFromJsonAsync<Response<BasketViewModel>>("baskets");
+            return result.Data;
+        }
         public async Task AddBasketItem(BasketItemViewModel basketItemViewModel)
         {
             var basket = await Get();
@@ -24,16 +39,18 @@ namespace FreeCourse.Web.Services.Concrete
                 if (!basket.BasketItems.Any(x => x.CourseId == basketItemViewModel.CourseId))
                 {
                     basket.BasketItems.Add(basketItemViewModel);
+                    await SaveOrUpdate(basket);
                 }
             }
             else
             {
-                basket = new BasketViewModel();
+               var newbasket = new BasketViewModel();
                 
-                basket.BasketItems.Add(basketItemViewModel);
+                newbasket.BasketItems.Add(basketItemViewModel);
+                await SaveOrUpdate(newbasket);
             }
 
-            await SaveOrUpdate(basket);
+            
         }
 
         public async Task<bool> ApplyDiscount(string discountCode)
@@ -79,17 +96,7 @@ namespace FreeCourse.Web.Services.Concrete
             return result.IsSuccessStatusCode;
         }
 
-        public async Task<BasketViewModel> Get()
-        {
-            var response = await _httpClient.GetAsync("baskets");
-            if (!response.IsSuccessStatusCode)
-            {
-                return null;
-            }
-
-            var result = await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
-            return result.Data;
-        }
+        
 
         public async Task<bool> RemoveBasketItem(string courseId)
         {

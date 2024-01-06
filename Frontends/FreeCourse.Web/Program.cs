@@ -37,14 +37,9 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     options.Cookie.Name = "webcookie";
 });
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddFluentValidation(options =>
-{
-    options.ImplicitlyValidateChildProperties = true;
-    options.ImplicitlyValidateRootCollectionElements = true;
+builder.Services.AddControllersWithViews();
 
-    // Automatic registration of validators in assembly
-    options.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-});
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
 var app = builder.Build();

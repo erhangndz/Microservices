@@ -9,8 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title">Sepet</h5>
 
-                @if(Model!=null & Model.BasketItems.Any())
-                {
+                
                     
                     <table class="table table-striped table-bordered">
 
@@ -24,14 +23,14 @@
                         {
                             <tr>
                                 <td>@item.CourseName</td>
-                                <td>@(Model.HasDiscount ? @item.GetCurrentPrice + " ₺" + "  " + $"%{Model.DiscountRate} İndirim uygulandı" : item.Price) ₺</td>
+                                <td> @item.GetCurrentPrice ₺</td>
                                 <td>
                                     <a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-courseId="@item.CourseId" class="btn btn-danger">Sil</a>
                                 </td>
                             </tr>
                         }
                       
-                        @if (Model.HasDiscount)
+                        @if(Model.HasDiscount)
                         {
                             <tr>
                                 <td>İndirim Oranı</td>
@@ -78,12 +77,9 @@
                     <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Ödeme Bilgileri</a>
                     <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Alışverişe devam et</a>
                             
-                }
+                
 
-                else
-                {
-                    <div class="alert alert-info">Sepetiniz Boş! </div>
-                }
+              
 
 
 

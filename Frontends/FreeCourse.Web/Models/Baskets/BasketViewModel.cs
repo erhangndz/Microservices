@@ -21,8 +21,8 @@
                 {
                     _basketItems.ForEach(x =>
                     {
-                        var discountPrice = x.Price * ((decimal)DiscountRate / 100);
-                        x.AppliedDiscount(Math.Round(x.Price - discountPrice, 2));
+                        var discountPrice = x.Price- (x.Price * ((decimal)DiscountRate / 100));
+                        x.AppliedDiscount(discountPrice);
                     });
                 }
                 return _basketItems;
