@@ -16,47 +16,30 @@ namespace FreeCourse.Web.Services.Concrete
             _discountService = discountService;
         }
 
-
-
-        public async Task<BasketViewModel> Get()
-        {
-            //var response = await _httpClient.GetAsync("baskets");
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //    return new BasketViewModel();
-            //}
-
-            //var result = await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
-
-            var result = await _httpClient.GetFromJsonAsync<Response<BasketViewModel>>("baskets");
-            return result.Data;
-        }
         public async Task AddBasketItem(BasketItemViewModel basketItemViewModel)
         {
             var basket = await Get();
+
             if (basket != null)
             {
                 if (!basket.BasketItems.Any(x => x.CourseId == basketItemViewModel.CourseId))
                 {
                     basket.BasketItems.Add(basketItemViewModel);
-                    await SaveOrUpdate(basket);
                 }
             }
             else
             {
-               var newbasket = new BasketViewModel();
-                
-                newbasket.BasketItems.Add(basketItemViewModel);
-                await SaveOrUpdate(newbasket);
+                basket = new BasketViewModel();
+
+                basket.BasketItems.Add(basketItemViewModel);
             }
 
-            
+            await SaveOrUpdate(basket);
         }
 
         public async Task<bool> ApplyDiscount(string discountCode)
         {
-
-            await CancelAppliedDiscount();
+            await CancelApplyDiscount();
 
             var basket = await Get();
             if (basket == null)
@@ -70,38 +53,51 @@ namespace FreeCourse.Web.Services.Concrete
                 return false;
             }
 
-            basket.ApplyDiscount(hasDiscount.Code,hasDiscount.Rate);
-            return await SaveOrUpdate(basket);
-
-
-
+            basket.ApplyDiscount(hasDiscount.Code, hasDiscount.Rate);
+            await SaveOrUpdate(basket);
+            return true;
         }
 
-        public async Task<bool> CancelAppliedDiscount()
+        public async Task<bool> CancelApplyDiscount()
         {
             var basket = await Get();
+
             if (basket == null || basket.DiscountCode == null)
             {
                 return false;
             }
 
             basket.CancelDiscount();
-            return await SaveOrUpdate(basket);
-
+            await SaveOrUpdate(basket);
+            return true;
         }
 
         public async Task<bool> Delete()
         {
             var result = await _httpClient.DeleteAsync("baskets");
+
             return result.IsSuccessStatusCode;
         }
 
-        
+        public async Task<BasketViewModel> Get()
+        {
+            var response = await _httpClient.GetAsync("baskets");
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+            var basketViewModel = await response.Content.ReadFromJsonAsync<Response<BasketViewModel>>();
+
+            return basketViewModel.Data;
+        }
 
         public async Task<bool> RemoveBasketItem(string courseId)
         {
             var basket = await Get();
+
             if (basket == null)
+
             {
                 return false;
             }
@@ -114,6 +110,7 @@ namespace FreeCourse.Web.Services.Concrete
             }
 
             var deleteResult = basket.BasketItems.Remove(deleteBasketItem);
+
             if (!deleteResult)
             {
                 return false;
@@ -125,16 +122,13 @@ namespace FreeCourse.Web.Services.Concrete
             }
 
             return await SaveOrUpdate(basket);
-
         }
 
         public async Task<bool> SaveOrUpdate(BasketViewModel basketViewModel)
         {
+            var response = await _httpClient.PostAsJsonAsync<BasketViewModel>("baskets", basketViewModel);
 
-            var response = await _httpClient.PostAsJsonAsync("baskets", basketViewModel);
             return response.IsSuccessStatusCode;
-
-
         }
     }
 }

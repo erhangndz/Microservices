@@ -1,0 +1,62 @@
+﻿@model List<OrderViewModel>
+@{
+    ViewData["Title"] = "CheckoutHistory";
+}
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        <div class="card">
+
+            <div class="card-body">
+
+                <h5 class="card-title">Ödeme Geçmişim</h5>
+
+                @if (Model.Any())
+                {
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Sipariş(ödeme) No</th>
+                            <th>Satın Alma Tarihi</th>
+                            <th>Detaylar</th>
+
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.CreatedDate.ToShortDateString()</td>
+                                <td>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Kurs Adı</th>
+                                            <th>Kurs Fiyat</th>
+                                        </tr>
+                                        @foreach (var orderItem in item.OrderItems)
+                                        {
+                                            <tr>
+                                                <td>@orderItem.ProductName</td>
+                                                <td>@orderItem.Price ₺</td>
+                                            </tr>
+                                        }
+
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        Satın Aldığınız herhangi bir kurs bulunmamaktadır.
+
+                    </div>
+                }
+            </div>
+        </div>
+    </di>
+</div>
+

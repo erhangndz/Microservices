@@ -8,9 +8,10 @@
         }
 
         public string UserId { get; set; }
+
         public string DiscountCode { get; set; }
 
-        public int DiscountRate { get; set; }
+        public int? DiscountRate { get; set; }
         private List<BasketItemViewModel> _basketItems;
 
         public List<BasketItemViewModel> BasketItems
@@ -19,10 +20,11 @@
             {
                 if (HasDiscount)
                 {
+                    //Örnek kurs fiyat 100 TL indirim %10
                     _basketItems.ForEach(x =>
                     {
-                        var discountPrice = x.Price- (x.Price * ((decimal)DiscountRate / 100));
-                        x.AppliedDiscount(discountPrice);
+                        var discountPrice = x.Price * ((decimal)DiscountRate.Value / 100);
+                        x.AppliedDiscount(Math.Round(x.Price - discountPrice, 2));
                     });
                 }
                 return _basketItems;
@@ -31,37 +33,22 @@
             {
                 _basketItems = value;
             }
-
-
         }
 
         public decimal TotalPrice
         {
-            get
-            {
-                if(HasDiscount)
-                {
-                   return _basketItems.Sum(x => x.GetCurrentPrice);
-                }
-               return _basketItems.Sum(x => x.Price);
-            }
-
-            set
-            {
-                TotalPrice = value; 
-            }
+            get => _basketItems.Sum(x => x.GetCurrentPrice);
         }
-
 
         public bool HasDiscount
         {
-            get => !string.IsNullOrEmpty(DiscountCode) && !DiscountRate.Equals(null);
+            get => !string.IsNullOrEmpty(DiscountCode) && DiscountRate.HasValue;
         }
 
         public void CancelDiscount()
         {
             DiscountCode = null;
-            DiscountRate = Convert.ToInt32(null);
+            DiscountRate = null;
         }
 
         public void ApplyDiscount(string code, int rate)
@@ -70,6 +57,6 @@
             DiscountRate = rate;
         }
 
-  
+
     }
 }

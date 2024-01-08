@@ -16,6 +16,6 @@ namespace FreeCourse.Web.Services.Interfaces
 
         Task<bool> ApplyDiscount(string discountCode);
 
-        Task<bool> CancelAppliedDiscount();
+        Task<bool> CancelApplyDiscount();
     }
 }

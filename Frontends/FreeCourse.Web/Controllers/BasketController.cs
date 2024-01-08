@@ -32,11 +32,12 @@ namespace FreeCourse.Web.Controllers
 
 
             var course = await _catalogService.GetByCourseIdAsync(courseId);
+
             var basketItem = new BasketItemViewModel { CourseId = course.CourseId, CourseName = course.Name, Price = course.Price };
 
             await _basketService.AddBasketItem(basketItem);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> RemoveBasketItem(string courseId)
@@ -66,9 +67,9 @@ namespace FreeCourse.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> CancelAppliedDiscount()
+        public async Task<IActionResult> CancelApplyDiscount()
         {
-            await _basketService.CancelAppliedDiscount();
+            await _basketService.CancelApplyDiscount();
             return RedirectToAction("Index");
         }
     }
