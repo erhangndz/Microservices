@@ -15,11 +15,9 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Kategori</label>
-                       <select asp-for="CategoryId">
-                        <option>Asp.Net Core</option>
-                         <option>Asp.Net Web API</option>
-                          <option>Sql Server</option>
-                       </select>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.categoryList">
+                            <option value="">Kategori seçiniz</option>
+                        </select>
                            <span class="text-danger" asp-validation-for="CategoryId"></span>
                     </div>
                     <div class="mb-3">

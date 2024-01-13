@@ -1,3 +1,4 @@
+using FreeCourse.Services.Catalog.Dtos;
 using FreeCourse.Services.Catalog.Services.Concrete;
 using FreeCourse.Services.Catalog.Services.Interfaces;
 using FreeCourse.Services.Catalog.Settings;
@@ -57,6 +58,19 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
+
+using (var scope=app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    var categoryService = serviceProvider.GetRequiredService<ICategoryService>();
+
+    if (!(await categoryService.GetAllAsync()).Data.Any())
+    {
+      await   categoryService.CreateAsync(new CreateCategoryDto { Name = "Asp.net Core Kursu" });
+      await   categoryService.CreateAsync(new CreateCategoryDto { Name = "Asp.net Core API Kursu" });
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

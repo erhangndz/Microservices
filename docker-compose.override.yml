@@ -30,7 +30,7 @@ services:
     ports:
       - "1433:1433"
     volumes:
-      - identitydb_volume:/var/opt/mssql
+      - identitydb_volume:/var/opt/mssql2
     environment:
       - ACCEPT_EULA=Y 
       - MSSQL_SA_PASSWORD=Password12*
@@ -41,7 +41,7 @@ services:
     ports:
       - "1444:1433"
     volumes:
-      - identitydb_volume:/var/opt/mssql2
+      - identitydb_volume:/var/opt/mssql
     environment:
       - ACCEPT_EULA=Y 
       - MSSQL_SA_PASSWORD=Password12*
@@ -58,6 +58,8 @@ services:
       - RabbitMQUrl=rabbitmq
       - IdentityServerURL=http://identityserver.api
       - DatabaseSettings:ConnectionString=mongodb://catalogdb:27017
+      - DatabaseSettings:CourseCollectionName=Courses
+      - DatabaseSettings:CategoryCollectionName=Categories
     ports:
       - "5010:80"
     depends_on:
@@ -109,7 +111,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - IdentityServerURL=http://identityserver.api
       - RabbitMQUrl=rabbitmq
-      - "ConnectionStrings:DefaultConnection=server=orderdb,1444;database=OrderDb;user=sa;password=Password12*;Trustservercertificate=true"
+      - "ConnectionStrings:DefaultConnection=server=orderdb,1433;database=OrderDb;user=sa;password=Password12*;Trustservercertificate=true"
     ports:
       - "5015:80"
     depends_on:
