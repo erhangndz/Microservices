@@ -54,10 +54,8 @@ namespace FreeCourse.Web.Controllers
 
             if(!result.IsValid)
             {
-                result.Errors.ForEach(x =>
-                {
-                    ModelState.AddModelError(x.PropertyName, x.ErrorMessage);
-                });
+              
+                TempData["discountError"] = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).First();
                 return RedirectToAction("Index");
             }
 

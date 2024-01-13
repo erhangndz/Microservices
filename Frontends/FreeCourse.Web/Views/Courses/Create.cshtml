@@ -15,7 +15,11 @@
 
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Kategori</label>
-                       @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.categoryList,"Kategoriyi Seçin",new{@class="form-control"}) 
+                       <select asp-for="CategoryId">
+                        <option>Asp.Net Core</option>
+                         <option>Asp.Net Web API</option>
+                          <option>Sql Server</option>
+                       </select>
                            <span class="text-danger" asp-validation-for="CategoryId"></span>
                     </div>
                     <div class="mb-3">

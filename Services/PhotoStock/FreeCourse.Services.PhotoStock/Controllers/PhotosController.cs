@@ -31,7 +31,7 @@ namespace FreeCourse.Services.PhotoStock.Controllers
 
         }
 
-
+        [HttpDelete]
         public IActionResult PhotoDelete(string photoUrl)
         {
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
