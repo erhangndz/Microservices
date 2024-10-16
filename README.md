@@ -1,59 +1,51 @@
-**Microservice Projesi**
+# Microservice E-Ticaret Uygulaması
 
-Merhaba,
+Bu proje, Udemy'de Fatih Çakıroğlu'ndan alınan .Net Core 7.0 eğitimi kapsamında geliştirilen bir **E-Ticaret Uygulaması**dır. Proje, Microservice Mimarisi'ni kullanarak online kurs satın alma işlemlerini gerçekleştiren bir sistem oluşturur.
 
-Bu repo, Fatih Çakıroğlu'ndan aldığım Udemy eğitimi kapsamındaki projemi içermektedir.
+## Proje Detayları
 
-___________________________________________
+Projede **.Net Core 7.0** ve **Microservice Mimarisi** kullanılmıştır. Uygulama, farklı microservisler ile modüler bir yapıdadır. Her microservice, belirli bir işlevi yerine getirir ve birbirleriyle mesajlaşma sistemi ile haberleşir.
 
-  **Proje Detayları**
+### Kullanılan Microservisler
 
-Bu Proje bir online kurs satın alınan e-ticaret uygulamasıdır. .Net Core 7.0 ve Microservice Mimarisi ile oluşturuldu. 
+- **Basket MicroService** - Alışveriş sepeti işlemlerini yönetir.  
+- **Catalog MicroService** - Ürün katalogları ve kurs bilgilerini yönetir.  
+- **Discount MicroService** - İndirim kampanyalarını yönetir.  
+- **Order MicroService** - Sipariş işlemlerini ve sipariş yönetimini sağlar.  
+- **FakePayment MicroService** - Ödeme işlemlerini simüle eder.  
+- **PhotoStock MicroService** - Ürün fotoğraflarını yönetir.  
 
-Projede kullanılan microservisler şunlar:
+## Kullanılan Teknolojiler ve Araçlar
 
-- Basket MicroService (.Net 7 API)
-- Catalog MicroService (.Net 7 API)
-- Discount MicroService (.Net 7 API)
-- Order MicroService  (.Net 7 API)
-- FakePayment MicroService (.Net 7 API)
-- PhotoStock MicroService (.Net 7 API)
-  _______________________________________
+Projede çeşitli teknolojiler ve araçlar kullanılmıştır. Bunlar, projenin mikroservis yapısında verimli bir şekilde çalışmasını sağlar:
 
-**_Kullanılan Teknolojiler ve Uygulamalar_**
+- **ASP.NET Core Web API 7.0**: Microservislerin API'lerini oluşturmak için kullanıldı.
+- **Ocelot Gateway**: API Gateway olarak kullanıldı, servisler arası yönlendirmeyi sağladı.
+- **MassTransit ve RabbitMQ**: Mesaj kuyruklama sistemi ile servisler arası haberleşme sağlandı.
+- **JWT (Json Web Token)**: API'lerin güvenliğini sağlamak amacıyla kullanıldı.
+- **Token Exchange**: Microservisler arasında kimlik doğrulama token'larının paylaşımı.
+- **Postman**: API'lerin test edilmesinde kullanıldı.
+- **ASP.NET Core MVC 7.0**: Frontend tarafında microservislerin kullanımını sağladı.
+- **Identity Model - OpenIDConnect**: Kimlik doğrulama ve yetkilendirme işlemlerinde kullanıldı.
+- **Onion Architecture**: Katmanlı mimari ile modüler yapı oluşturuldu.
+- **Domain Driven Design (DDD)**: Domain tabanlı yazılım geliştirme yaklaşımı benimsendi.
+- **Veritabanı Teknolojileri**:
+  - **Microsoft SQL Server**
+  - **PostgreSQL**
+  - **MongoDB**
+  - **Redis**
+- **Docker**: Uygulamalar Docker ile konteynerize edildi ve Docker Compose ile yönetildi.
+- **Portainer**: Docker konteynerlerinin yönetiminde kullanıldı.
+- **Identity Server (.Net Core 3.1)**: Kimlik doğrulama işlemleri için ücretsiz versiyonu kullanıldı.
+- **Entity Framework Core (Code First)**: Veritabanı işlemleri için kullanıldı.
+- **Dapper Micro-ORM**: Veritabanı sorguları için kullanıldı.
+- **AutoMapper**: Nesne dönüştürme işlemlerinde kullanıldı.
+- **Bootstrap, CSS, HTML**: Frontend tasarımında kullanıldı.
 
+## Kurulum
 
-- Asp.Net Core Web Api 7.0
-- Ocelot Gateway
-- MassTransit RabbitMQ (Mesaj kuyruk sistemi kullanılarak veritabanları arasında haberleşme sağlandı)
-- Json Web Token ile API'ler koruma altına alındı
-- Token Exchange
-- Postman ile testleri yapıldı
-- Frontend tarafında Asp.Net Core (MVC) 7.0 ile tüm servisler Client tarafında kullanıldı.
-- Identity Model- OpenIDConnect
-- Onion Architecture
-- Domain Driven Design (DDD) 
-- Microsoft SQL Server
-- PostgreSQL
-- MongoDb
-- Redis
-- Docker (Image, Container, Docker Compose)
-- Portainer
-- Identity Server (.Net Core 3.1- Ücretsiz Versiyon )
-- Entity Framework Code First
-- Dapper Micro-ORM
-- AutoMapper 
-- Bootstrap
-- CSS
-- HTML
-_______________________________________
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
-
-
-
-
-
-
-
-
-  
+1. **Repo'yu Klonlayın**:
+   ```bash
+   git clone https://github.com/kullanici-adi/proje-adi.git
